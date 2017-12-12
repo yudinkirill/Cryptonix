@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoCalculator"
         mc:Ignorable="d"
-        Title="Cryptonix" Height="535" Width="350" Loaded="Window_Loaded" ResizeMode="NoResize">
-    <Grid  HorizontalAlignment="Center" Width="342">
+        Title="Cryptonix" Height="535" Width="350" Loaded="Window_Loaded" ResizeMode="NoResize" Icon="Design/CRYPTONIX-Logo-Circ.png">
+    <Grid  HorizontalAlignment="Center" Width="344">
 
 
         <Grid x:Name="LayoutRoot" HorizontalAlignment="Center"  Margin="37,143,38,104">
@@ -51,10 +51,10 @@
             <Button x:Name="lefts" Content="(" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Row="2" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Background="#FFECEAEA"/>
             <Button x:Name="rights" Content=")" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Row="3" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Margin="0,1,0,0" Background="#FFECEAEA"/>
         </Grid>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="119" Margin="47,14,0,0" VerticalAlignment="Top" Width="250">
-            <TextBox x:Name="MSCR" Text="" FontSize="20" TextAlignment="Right" FontFamily="Roboto Medium"  Margin="0,0,0,48" BorderBrush="{x:Null}"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="119" Margin="10,14,0,0" VerticalAlignment="Top" Width="322">
+            <TextBox x:Name="MSCR" Text="" FontSize="20" TextAlignment="Right" FontFamily="Roboto Medium"  Margin="9,0,9,48" BorderBrush="{x:Null}"/>
         </Border>
-        <TextBox x:Name="RESULT" FontSize="36" TextAlignment="Right" FontFamily="Roboto Medium"  Margin="48,84,46,373" BorderBrush="{x:Null}"/>
+        <TextBlock x:Name="RESULT" FontSize="36" TextAlignment="Right" FontFamily="Roboto Medium"  Margin="20,85,26,373"  Cursor="Arrow"/>
 
         <Grid HorizontalAlignment="Center" Margin="37,409,38,0" Width="250" Height="80" VerticalAlignment="Top"  >
             <Grid.ColumnDefinitions>

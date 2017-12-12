@@ -80,10 +80,8 @@ namespace CryptoCalculator
                     Update_RightOp();
                     RESULT.Text += rightop;
                     operation = "";
-                    MSCR.Text.Substring(0, MSCR.Text.Length - 1);
-
-                    
                 }
+
                 // Очищаем поле и переменные
                 else if (s == "CE")
                 {
@@ -97,12 +95,10 @@ namespace CryptoCalculator
                 //Удаляем один символ
                 else if (s == "C")
                 {
-                    MessageBox.Show("Saqqwr");
-                    MSCR.Text.Substring(0, MSCR.Text.Length - 1);
+                     MSCR.Text =  MSCR.Text.Remove((int)MSCR.Text.Length-1,1);
                 }
 
                 // Получаем операцию
-
                 else
                 {
                     // Если правый операнд уже имеется, то присваиваем его значение левому
@@ -139,11 +135,19 @@ namespace CryptoCalculator
                     break;
             }
         }
-    
+        //CalculatingCrypto
+        Dictionary<string, decimal> cryptorates = new Dictionary<string, decimal>
+        {
+            ["BTC"] = 0,
+            ["ETH"] = 0,
+            ["EUR"] = 0,
+            ["USD"] = 0,
+        };
 
-    //Parsing---------------------------------------------------
 
-    private void Window_Loaded(object sender, RoutedEventArgs e)
+        //Parsing---------------------------------------------------
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             btcinfo.Text = BTCParse();
             bitcoin = btc.Content;
@@ -156,6 +160,8 @@ namespace CryptoCalculator
 
             usdinfo.Text = USDParse();
             dollar = usd.Content;
+
+            
         }
 
         private string BTCParse ()

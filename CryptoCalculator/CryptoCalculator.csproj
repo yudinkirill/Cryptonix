@@ -100,7 +100,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="untitled%281%29.png" />
+    <Resource Include="Design\CRYPTONIX-01.png" />
+    <Resource Include="Design\CRYPTONIX-Logo-Circ.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
