@@ -5,8 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoCalculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="Cryptonix" Height="535" Width="350" Loaded="Window_Loaded">
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" Width="325" Margin="0,0,2,0">
+
+
+        <Grid HorizontalAlignment="Center"  Margin="37,143,38,104">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+
+            </Grid.RowDefinitions>
+            <Button Content="C" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Margin="0,2,0,50" Grid.RowSpan="2"/>
+            <Button Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Column="1" FontFamily="Roboto Medium" FontSize="20" Margin="0,2,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Column="2" FontFamily="Roboto Medium" FontSize="20" Margin="0,2,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Column="3" FontFamily="Roboto Medium" FontSize="20" Margin="0,2,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Column="4" Margin="0,2,0,50" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="CE" x:Name="Clear" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Row="1" FontFamily="Roboto Medium" FontSize="20" RenderTransformOrigin="0.5,0.24" BorderBrush="White" Click="Clear_click" Margin="0,1,0,50" Grid.RowSpan="2"/>
+            <Button Content="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Column="1" Grid.Row="1" FontFamily="Roboto Medium" FontSize="20" Margin="0,1,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Column="2" Grid.Row="1" FontFamily="Roboto Medium" FontSize="20" Margin="0,1,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Column="3" Grid.Row="1" FontFamily="Roboto Medium" FontSize="20" Margin="0,1,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="," HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Row="3" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Grid.Column="1" Margin="0,1,0,0"/>
+            <Button Content="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Row="2" Grid.Column="1" FontFamily="Roboto Medium" FontSize="20" Margin="0,1,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="8" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Row="2" Grid.Column="2" FontFamily="Roboto Medium" FontSize="20" Margin="0,1,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="9" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Row="2" Grid.Column="3" FontFamily="Roboto Medium" FontSize="20" Margin="0,1,0,50" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="-" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Column="4" Grid.Row="1" Margin="0,1,0,50" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Grid.RowSpan="2"/>
+            <Button Content="=" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Row="3" Grid.Column="3" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Margin="0,1,0,0"/>
+            <Button Content="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Row="3" Grid.Column="2" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Margin="0,1,0,0"/>
+            <Button x:Name="eur" Content="EUR" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Row="4" Grid.Column="1" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Background="#FFFFCC00"/>
+            <Button x:Name="rub" Content="RUB" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Row="4"  Grid.Column="2" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Background="#FFFFCC00"/>
+            <Button x:Name="usd" Content="USD" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="52" Grid.Row="4"  FontFamily="Roboto Medium" FontSize="20" Margin="0,0,0,-1" BorderBrush="White" Background="#FFFFCC00"/>
+            <Button x:Name="eth" Content="ETH" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Row="4" Grid.Column="4"  FontFamily="Roboto Medium" FontSize="20" Margin="0,0,0,1" BorderBrush="White" Background="#FFFFCC00"/>
+            <Button x:Name="btc" Content="BTC" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Row="4" Grid.Column="3" FontFamily="Roboto Medium" FontSize="20" Margin="0,0,0,1" BorderBrush="White" Background="#FFFFCC00"/>
+            <Button Content="*" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="51" Grid.Column="4" Grid.Row="2" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Margin="0,1,0,50" Grid.RowSpan="2"/>
+            <Button Content="/" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Column="4" Grid.Row="3" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Margin="0,1,0,0"/>
+        </Grid>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="119" Margin="37,14,0,0" VerticalAlignment="Top" Width="250">
+            <TextBox x:Name="MSCR" Text="0" FontSize="20" TextAlignment="Right" FontFamily="Roboto Medium" Foreground="#FF1B1818"/>
+        </Border>
+
+        <Grid HorizontalAlignment="Center" Margin="37,409,38,0" Width="250" Height="80" VerticalAlignment="Top"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="101*"/>
+                <ColumnDefinition Width="149*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="btcinfo" Text="btc" TextAlignment="Left" HorizontalAlignment="Center"  VerticalAlignment="Center"  Width="148" Height="20" Grid.Row="0" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
+            <TextBlock x:Name="ethinfo" Text="eth" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Center" Width="148" Height="20"  Grid.Row="1" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
+            <TextBlock x:Name="eurinfo" Text="eur" TextAlignment="Left" HorizontalAlignment="Center"   VerticalAlignment="Center"  Width="148" Height="20"  Grid.Row="3" Grid.Column="1" Margin="1,1,0,-1" FontSize="14" FontFamily="Roboto"/>
+            <TextBlock x:Name="usdinfo" Text="usd" TextAlignment="Left" HorizontalAlignment="Center"   VerticalAlignment="Center" Width="148" Height="20" Grid.Row="2" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Bitcoin" VerticalAlignment="Top" Height="20" Grid.Row="0" Width="101" FontSize="14" FontFamily="Roboto" Margin="0,1,0,0" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Etherium" VerticalAlignment="Top"  Height="20" Grid.Row="1" Width="101" FontSize="14" FontFamily="Roboto" Margin="0,1,0,0" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Dollar" VerticalAlignment="Top"  Height="20" Grid.Row="2" Width="101" FontSize="14" FontFamily="Roboto" Margin="0,1,0,0" Grid.RowSpan="2"/>
+            <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Euro" VerticalAlignment="Top"  Height="20" Grid.Row="3" Width="101" FontSize="14" FontFamily="Roboto" Margin="0,1,0,-1"/>
+        </Grid>
+
     </Grid>
 </Window>
