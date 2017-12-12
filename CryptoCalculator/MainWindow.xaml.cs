@@ -25,7 +25,7 @@ namespace CryptoCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        object bitcoin;
+       object bitcoin;
         object ethereum;
         object euro;
         object dollar;
@@ -93,18 +93,21 @@ namespace CryptoCalculator
                 }
 
                 //Удаляем один символ
-                else if (s == "C")
+                else if (s == "X")
                 {
-
-              /*      if ( )
-                    {
-                        MSCR.Text = MSCR.Text.Remove((int)MSCR.Text.Length - 2, 2);
-                    }
-
-                    else
-                    {
-                        null;
-                    }*/
+                                     
+                        try
+                        {
+                            MSCR.Text = MSCR.Text.Remove((int)MSCR.Text.Length - 2, 2);
+                        if (MSCR.Text.Contains("X"))
+                            MSCR.Text.Remove(0, 1);
+                            
+                        }
+                        catch
+                        {
+                        }
+                    
+                   
                 }
 
                 // Получаем операцию
@@ -144,17 +147,11 @@ namespace CryptoCalculator
                     break;
             }
         }
-        //CalculatingCrypto
-        Dictionary<string, decimal> cryptorates = new Dictionary<string, decimal>
-        {
-            ["BTC"] = 0,
-            ["ETH"] = 0,
-            ["EUR"] = 0,
-            ["USD"] = 0,
-        };
+
 
 
         //Parsing---------------------------------------------------
+        
 
         private async void Window_Loaded (object sender, RoutedEventArgs e)
         {

@@ -25,7 +25,7 @@
                 <RowDefinition Height="50"/>
 
             </Grid.RowDefinitions>
-            <Button x:Name="Delete" Content="C" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Margin="0,2,0,50" Grid.RowSpan="2" Background="#FFECEAEA"/>
+            <Button x:Name="Delete" Content="X" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" FontFamily="Roboto Medium" FontSize="20" BorderBrush="White" Margin="0,2,0,50" Grid.RowSpan="2" Background="#FFECEAEA"/>
             <Button x:Name="one" Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Column="1" FontFamily="Roboto Medium" FontSize="20" Margin="0,2,0,50" BorderBrush="White" Grid.RowSpan="2" Background="#FFECEAEA"/>
             <Button x:Name="two" Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Column="2" FontFamily="Roboto Medium" FontSize="20" Margin="0,2,0,50" BorderBrush="White" Grid.RowSpan="2" Background="#FFECEAEA"/>
             <Button x:Name="three" Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Grid.Column="3" FontFamily="Roboto Medium" FontSize="20" Margin="0,2,0,50" BorderBrush="White" Grid.RowSpan="2" Background="#FFECEAEA"/>
@@ -67,10 +67,10 @@
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="btcinfo" Text="btc" TextAlignment="Left" HorizontalAlignment="Center"  VerticalAlignment="Center"  Width="148" Height="20" Grid.Row="0" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
-            <TextBlock x:Name="ethinfo" Text="eth" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Center" Width="148" Height="20"  Grid.Row="1" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
-            <TextBlock x:Name="eurinfo" Text="eur" TextAlignment="Left" HorizontalAlignment="Center"   VerticalAlignment="Center"  Width="148" Height="20"  Grid.Row="3" Grid.Column="1" Margin="1,1,0,-1" FontSize="14" FontFamily="Roboto"/>
-            <TextBlock x:Name="usdinfo" Text="usd" TextAlignment="Left" HorizontalAlignment="Center"   VerticalAlignment="Center" Width="148" Height="20" Grid.Row="2" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
+            <TextBlock x:Name="btcinfo" Text="" TextAlignment="Left" HorizontalAlignment="Center"  VerticalAlignment="Center"  Width="148" Height="20" Grid.Row="0" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
+            <TextBlock x:Name="ethinfo" Text="" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Center" Width="148" Height="20"  Grid.Row="1" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
+            <TextBlock x:Name="eurinfo" Text="" TextAlignment="Left" HorizontalAlignment="Center"   VerticalAlignment="Center"  Width="148" Height="20"  Grid.Row="3" Grid.Column="1" Margin="1,1,0,-1" FontSize="14" FontFamily="Roboto"/>
+            <TextBlock x:Name="usdinfo" Text="" TextAlignment="Left" HorizontalAlignment="Center"   VerticalAlignment="Center" Width="148" Height="20" Grid.Row="2" Grid.Column="1" Margin="0,1,1,19" FontSize="14" FontFamily="Roboto" Grid.RowSpan="2"/>
             <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Bitcoin" VerticalAlignment="Top" Height="20" Grid.Row="0" Width="101" FontSize="14" FontFamily="Roboto" Margin="0,1,0,0" Grid.RowSpan="2"/>
             <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Etherium" VerticalAlignment="Top"  Height="20" Grid.Row="1" Width="101" FontSize="14" FontFamily="Roboto" Margin="0,1,0,0" Grid.RowSpan="2"/>
             <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Dollar" VerticalAlignment="Top"  Height="20" Grid.Row="2" Width="101" FontSize="14" FontFamily="Roboto" Margin="0,1,0,0" Grid.RowSpan="2"/>
