@@ -26,7 +26,7 @@ namespace CryptoCalculator
     public partial class MainWindow : Window
     {
         object bitcoin;
-        object etherium;
+        object ethereum;
         object euro;
         object dollar;
 
@@ -34,15 +34,15 @@ namespace CryptoCalculator
         string operation = ""; // Знак операции
         string rightop = ""; // Правый операнд
 
-        //Calculating
+        //Calculating--------------------------------------------
         public MainWindow()
         {
             InitializeComponent();
-            foreach (UIElement c in LayoutRoot.Children)
+            foreach (UIElement UI in LayoutRoot.Children)
             {
-                if (c is Button)
+                if (UI is Button)
                 {
-                    ((Button)c).Click += Button_Click;
+                    ((Button)UI).Click += Button_Click;
                 }
             }
         }
@@ -53,9 +53,9 @@ namespace CryptoCalculator
             string s = (string)((Button)e.OriginalSource).Content;
             // Добавляем его в текстовое поле
             MSCR.Text += s;
-            int num;
+            decimal num;
             // Пытаемся преобразовать его в число
-            bool result = Int32.TryParse(s, out num);
+            bool result = Decimal.TryParse(s, out num);
             // Если текст - это число
             if (result == true)
             {
@@ -78,18 +78,31 @@ namespace CryptoCalculator
                 if (s == "=")
                 {
                     Update_RightOp();
-                    MSCR.Text += rightop;
+                    RESULT.Text += rightop;
                     operation = "";
+                    MSCR.Text.Substring(0, MSCR.Text.Length - 1);
+
+                    
                 }
                 // Очищаем поле и переменные
-                else if (s == "CLEAR")
+                else if (s == "CE")
                 {
                     leftop = "";
                     rightop = "";
                     operation = "";
                     MSCR.Text = "";
+                    RESULT.Text = "";
                 }
+
+                //Удаляем один символ
+                else if (s == "C")
+                {
+                    MessageBox.Show("Saqqwr");
+                    MSCR.Text.Substring(0, MSCR.Text.Length - 1);
+                }
+
                 // Получаем операцию
+
                 else
                 {
                     // Если правый операнд уже имеется, то присваиваем его значение левому
@@ -107,8 +120,8 @@ namespace CryptoCalculator
         // Обновляем значение правого операнда
         private void Update_RightOp()
         {
-            int num1 = Int32.Parse(leftop);
-            int num2 = Int32.Parse(rightop);
+            decimal num1 = Decimal.Parse(leftop);
+            decimal num2 = Decimal.Parse(rightop);
             // И выполняем операцию
             switch (operation)
             {
@@ -128,7 +141,7 @@ namespace CryptoCalculator
         }
     
 
-    //Parsing
+    //Parsing---------------------------------------------------
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -136,7 +149,7 @@ namespace CryptoCalculator
             bitcoin = btc.Content;
 
             ethinfo.Text = ETHParse();
-            etherium = eth.Content;
+            ethereum = eth.Content;
 
             eurinfo.Text = EURParse();
             euro = eur.Content;
@@ -216,10 +229,7 @@ namespace CryptoCalculator
 
 
 
-        private void Clear_click(object sender, RoutedEventArgs e)
-        {
-            MSCR.Text = null;
-        }
+       
     }
 }
 
