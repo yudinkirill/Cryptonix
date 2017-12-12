@@ -95,7 +95,16 @@ namespace CryptoCalculator
                 //Удаляем один символ
                 else if (s == "C")
                 {
-                     MSCR.Text =  MSCR.Text.Remove((int)MSCR.Text.Length-1,1);
+
+              /*      if ( )
+                    {
+                        MSCR.Text = MSCR.Text.Remove((int)MSCR.Text.Length - 2, 2);
+                    }
+
+                    else
+                    {
+                        null;
+                    }*/
                 }
 
                 // Получаем операцию
@@ -147,18 +156,18 @@ namespace CryptoCalculator
 
         //Parsing---------------------------------------------------
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded (object sender, RoutedEventArgs e)
         {
-            btcinfo.Text = BTCParse();
+            btcinfo.Text = await Task.Run(() => BTCParse());
             bitcoin = btc.Content;
 
-            ethinfo.Text = ETHParse();
+            ethinfo.Text = await Task.Run(() => ETHParse());
             ethereum = eth.Content;
 
-            eurinfo.Text = EURParse();
+            eurinfo.Text = await Task.Run(() => EURParse());
             euro = eur.Content;
 
-            usdinfo.Text = USDParse();
+            usdinfo.Text = await Task.Run(() => USDParse());
             dollar = usd.Content;
 
             
