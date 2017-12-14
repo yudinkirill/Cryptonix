@@ -44,35 +44,35 @@ namespace CryptoCalculator
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             btcinfo.Text = await Task.Run(() => BTCParse());
-            bitcoin = btc.Content;
+            bitcoin = btcinfo.Text;
 
             ethinfo.Text = await Task.Run(() => ETHParse());
-            ethereum = eth.Content;
+            ethereum = ethinfo.Text;
 
             eurinfo.Text = await Task.Run(() => EURParse());
-            euro = eur.Content;
+            euro = eurinfo.Text;
 
             usdinfo.Text = await Task.Run(() => USDParse());
-            dollar = usd.Content;
+            dollar = usdinfo.Text;
 
 
         }
 
         private string BTCParse()
         {
-            var website = new HtmlWeb();
-            website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
-            var doc = website.Load("https://exmo.me/ru/trade#?pair=BTC_USD");
-            HtmlNode btcC = doc.DocumentNode.SelectSingleNode("//li[@pair='BTC_RUB']//div[@class='pair_price sprice hide']");
+            try
+            {
+                var website = new HtmlWeb();
+                website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
+                var doc = website.Load("https://exmo.me/ru/trade#?pair=BTC_USD");
+                HtmlNode btcC = doc.DocumentNode.SelectSingleNode("//li[@pair='BTC_RUB']//div[@class='pair_price sprice hide']");
 
-            if (btcC != null)
-            {
-                return btcC.InnerText;
+                
+                    return btcC.InnerText;
+                
+                
             }
-            else
-            {
-                return "Error!";
-            }
+            catch { return "Error!"; }
         }
 
         private string ETHParse()
@@ -208,27 +208,54 @@ namespace CryptoCalculator
             RESULT.Text = "";
         }
 
+
+        //Just one symbol
+        void CheckLastAndReplaceIfSymbol(string newSymb)
+        {
+            try
+            {
+                switch (MSCR.Text.Last())
+                {
+                    case '/':
+                    case '+':
+                    case '-':
+                    case '*':
+                        MSCR.Text = MSCR.Text.Remove(MSCR.Text.Length - 1) + newSymb;
+                        break;
+                    default:
+
+                        MSCR.Text += newSymb;
+                        break;
+                }
+            }
+            catch { }
+
+        }
+
+
         private void minus_Click(object sender, RoutedEventArgs e)
         {
-            
-                
-                MSCR.Text += "-";
-            
+
+
+            //MSCR.Text += "-";
+            CheckLastAndReplaceIfSymbol("-");
+
+
         }
 
         private void plus_Click(object sender, RoutedEventArgs e)
         {
-            MSCR.Text += "+";
+            CheckLastAndReplaceIfSymbol("+");
         }
 
         private void multiply_Click(object sender, RoutedEventArgs e)
         {
-            MSCR.Text += "*";
+            CheckLastAndReplaceIfSymbol("*");
         }
 
         private void devision_Click(object sender, RoutedEventArgs e)
         {
-            MSCR.Text += "/";
+            CheckLastAndReplaceIfSymbol("/");
         }
 
         private void dot_Click(object sender, RoutedEventArgs e)
@@ -246,29 +273,57 @@ namespace CryptoCalculator
             MSCR.Text += ")";
         }
 
+
+        //Currency
+
+        void CheckLastAndReplaceIfCurrency(string newCurrency)
+        {
+            try
+            {
+                switch (MSCR.Text.Substring(MSCR.Text.Length-3))
+                {
+                    case "USD":
+                    case "EUR":
+                    case "BTC":
+                    case "BCH":
+                    case "ETH":
+                        MSCR.Text = MSCR.Text.Remove(MSCR.Text.Length - 3) + newCurrency;
+                        break;
+                    default:
+
+                        MSCR.Text += newCurrency;
+                        break;
+                }
+            }
+            catch {
+                MSCR.Text += newCurrency;
+            }
+
+        }
+
         private void usd_Click(object sender, RoutedEventArgs e)
         {
-            MSCR.Text += "USD";
+            CheckLastAndReplaceIfCurrency("USD");
         }
 
         private void eur_Click(object sender, RoutedEventArgs e)
         {
-            MSCR.Text += "EUR";
+            CheckLastAndReplaceIfCurrency("EUR");
         }
 
         private void BCH_Click(object sender, RoutedEventArgs e)
         {
-            MSCR.Text += "BCH";
+            CheckLastAndReplaceIfCurrency("BCH");
         }
 
         private void btc_Click(object sender, RoutedEventArgs e)
         {
-            MSCR.Text += "BTC";
+            CheckLastAndReplaceIfCurrency("BTC");
         }
 
         private void eth_Click(object sender, RoutedEventArgs e)
         {
-            MSCR.Text += "ETH";
+            CheckLastAndReplaceIfCurrency("ETH");
         }
 
         private void equal_Click(object sender, RoutedEventArgs e)
