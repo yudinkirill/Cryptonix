@@ -16,7 +16,9 @@ using HtmlAgilityPack;
 using System.Data;
 using System.Net;
 using System.Diagnostics;
-
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace CryptoCalculator
 {
@@ -37,7 +39,7 @@ namespace CryptoCalculator
         object dash;
         object zcash;
 
-        //Calculating--------------------------------------------
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -50,132 +52,112 @@ namespace CryptoCalculator
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            usdinfo.Text = await Task.Run(() => USDParse());
-            dollar = usdinfo.Text;
 
-            eurinfo.Text = await Task.Run(() => EURParse());
-            euro = eurinfo.Text;
+            try
+            {
+                usdinfo.Text = await Task.Run(() => USDParse());
+                dollar = usdinfo.Text;
 
-            btcinfo.Text = await Task.Run(() => BTCParse());
-            bitcoin = btcinfo.Text;
+                eurinfo.Text = await Task.Run(() => EURParse());
+                euro = eurinfo.Text;
 
-            bchinfo.Text = await Task.Run(() => BCHParse());
-            bitcoincash = bchinfo.Text;
+                await Task.Run(PostRequestAsync);
 
-            ethinfo.Text = await Task.Run(() => ETHParse());
-            ethereum = ethinfo.Text;
+                btcinfo.Text = bitcoin.ToString();
+                bchinfo.Text = bitcoincash.ToString();
+                ethinfo.Text = ethereum.ToString();
+                etcinfo.Text = ethereumclassic.ToString();
+            }
+            catch { }
 
-            etcinfo.Text = await Task.Run(() => ETCParse());
-            ethereumclassic = etcinfo.Text;
+        }
+
+        private  async Task PostRequestAsync()
+        {
+            WebRequest request = WebRequest.Create("https://api.exmo.com/v1/ticker/");
+            request.Method = "POST"; // для отправки используется метод Post
+                                     // данные для отправки
+            string data = "";
+            // преобразуем данные в массив байтов
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(data);
+            // устанавливаем тип содержимого - параметр ContentType
+            request.ContentType = "application/x-www-form-urlencoded";
+            // Устанавливаем заголовок Content-Length запроса - свойство ContentLength
+            request.ContentLength = byteArray.Length;
+
+            //записываем данные в поток запроса
+            using (Stream dataStream = request.GetRequestStream())
+            {
+                dataStream.Write(byteArray, 0, byteArray.Length);
+            }
+
+            WebResponse response = await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                FilterJSON f = new FilterJSON();
+                DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(f.GetType());
+                var obj = (FilterJSON)jsonFormatter.ReadObject(stream);
+                bitcoin = obj.BTC.buy_price;
+                bitcoincash = obj.BCH.buy_price;
+                ethereum = obj.ETH.buy_price;
+                ethereumclassic = obj.ETС.buy_price;
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    Console.WriteLine(reader.ReadToEnd());
+                }
+            }
+            response.Close(); 
         }
 
 
 
-
+        #region Parsing
         private string USDParse()
         {
-            try
+            while (true)
             {
-                var website = new HtmlWeb();
-                website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
-                var doc = website.Load("https://finance.rambler.ru/currencies/USD/");
-                HtmlNode usdC = doc.DocumentNode.SelectSingleNode("//div[@class='exr-top-info__val']");
+                try
+                {
+                    var website = new HtmlWeb();
+                    website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
+                    var doc = website.Load("https://finance.rambler.ru/currencies/USD/");
+                    HtmlNode usdC = doc.DocumentNode.SelectSingleNode("//div[@class='exr-top-info__val']");
 
 
-                return usdC.InnerHtml;
-            }
-            catch
-            { 
-                return "Error!";
+                    return usdC.InnerHtml;
+                }
+                catch
+                {
+                   
+                }
+                 
             }
         }
 
         private string EURParse()
         {
-            try
+            while (true)
             {
-                var website = new HtmlWeb();
-                website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
-                var doc = website.Load("https://finance.rambler.ru/currencies/EUR/");
-                HtmlNode eurC = doc.DocumentNode.SelectSingleNode("//div[@class='exr-top-info__val']");
+                try
+                {
+                    var website = new HtmlWeb();
+                    website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
+                    var doc = website.Load("https://finance.rambler.ru/currencies/EUR/");
+                    HtmlNode eurC = doc.DocumentNode.SelectSingleNode("//div[@class='exr-top-info__val']");
 
 
-                return eurC.InnerText;
-            }
-            catch
-            {
+                    return eurC.InnerText;
+                }
+                catch
+                {
 
-                return "Error!";
+                    return "Error!";
+                }
             }
         }
+        #endregion
 
-        private string BTCParse()
-        {
-            try
-            {
-                var website = new HtmlWeb();
-                website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
-                var doc = website.Load("https://exmo.me/ru/trade#?pair=BTC_USD");
-                HtmlNode btcC = doc.DocumentNode.SelectSingleNode("//li[@pair='BTC_RUB']//div[@class='pair_price sprice hide']");
-
-
-                return btcC.InnerText;
-
-
-            }
-            catch { return "Error!"; }
-        }
-
-        private string BCHParse()
-        {
-            try
-            {
-                var website = new HtmlWeb();
-                website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
-                var doc = website.Load("https://exmo.me/ru/trade#?pair=BTC_USD");
-                HtmlNode bchC = doc.DocumentNode.SelectSingleNode("//li[@pair='BCH_RUB']//div[@class='pair_price sprice hide']");
-
-
-                return bchC.InnerText;
-
-
-            }
-            catch { return "Error!"; }
-        }
-
-        private string ETHParse()
-        {
-            try
-            {
-                var website = new HtmlWeb();
-                website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
-                var doc = website.Load("https://exmo.me/ru/trade#?pair=BTC_USD");
-                HtmlNode ethC = doc.DocumentNode.SelectSingleNode("//li[@pair='ETH_RUB']//div[@class='pair_price sprice hide']");
-
-
-                return ethC.InnerText;
-            }
-            catch { return "Error!"; }
-
-        }
-
-        private string ETCParse()
-        {
-            try
-            {
-                var website = new HtmlWeb();
-                website.OverrideEncoding = Encoding.GetEncoding("windows-1251");
-                var doc = website.Load("https://exmo.me/ru/trade#?pair=BTC_USD");
-                HtmlNode etcC = doc.DocumentNode.SelectSingleNode("//li[@pair='ETC_RUB']//div[@class='pair_price sprice hide']");
-
-
-                return etcC.InnerText;
-            }
-            catch { return "Error!"; }
-
-        }
-
-
+        #region Buttons
         //Calculating
 
         private void one_Click(object sender, RoutedEventArgs e)
@@ -228,7 +210,7 @@ namespace CryptoCalculator
             MSCR.Text += 0;
         }
 
-
+       
 
 
         //Functions-----------------------------------------------
@@ -320,9 +302,13 @@ namespace CryptoCalculator
             MSCR.Text += ")";
         }
 
+        private void equal_Click(object sender, RoutedEventArgs e)
+        {
+            Calculating();
+        }
 
         //Currency
-
+        #region CurrencyButtons
         void CheckLastAndReplaceIfCurrency(string newCurrency)
         {
             try
@@ -348,6 +334,7 @@ namespace CryptoCalculator
 
         }
 
+        
         private void usd_Click(object sender, RoutedEventArgs e)
         {
             CheckLastAndReplaceIfCurrency("USD");
@@ -372,13 +359,10 @@ namespace CryptoCalculator
         {
             CheckLastAndReplaceIfCurrency("ETH");
         }
+        #endregion
 
-
-        private void equal_Click(object sender, RoutedEventArgs e)
-        {
-            Calculating();
-        }
-
+       
+        #endregion
 
         private void Calculating()
         {
@@ -401,5 +385,5 @@ namespace CryptoCalculator
             }
         }
     }
+    
 }
-
